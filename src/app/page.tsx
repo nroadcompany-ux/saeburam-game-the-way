@@ -74,6 +74,36 @@ export default function HomePage() {
           <div className="h-px flex-1" style={{ background: "rgba(201,168,76,0.2)" }} />
         </div>
 
+        {/* Chapter 0 - Prologue card */}
+        <Link href="/chapter/0" className="block mb-4 group">
+          <div className="relative rounded-2xl border overflow-hidden" style={{ borderColor: "rgba(201,168,76,0.2)", background: "rgba(5,8,20,0.85)" }}>
+            <div className="h-px w-full" style={{ background: "linear-gradient(to right,transparent,rgba(201,168,76,0.4),transparent)" }} />
+            <div className="p-5 flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="relative w-8 h-8 shrink-0">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-px h-8" style={{ background: "linear-gradient(to bottom,transparent,rgba(201,168,76,0.6),transparent)" }} />
+                  </div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="h-px w-6 -translate-y-2" style={{ background: "linear-gradient(to right,transparent,rgba(201,168,76,0.6),transparent)" }} />
+                  </div>
+                </div>
+                <div>
+                  <p className="text-[10px] font-mono uppercase tracking-widest mb-0.5" style={{ color: "rgba(201,168,76,0.45)" }}>Chapter 00 · Prologue</p>
+                  <p className="font-bold text-sm" style={{ color: "rgba(253,246,227,0.85)" }}>심판대</p>
+                  <p className="text-[11px] mt-0.5" style={{ color: "rgba(253,246,227,0.3)" }}>5~10분 · 시네마틱</p>
+                </div>
+              </div>
+              <div className="text-right">
+                <span className="text-xs px-2 py-1 rounded-lg font-semibold" style={{ background: "rgba(201,168,76,0.08)", color: "rgba(201,168,76,0.6)", border: "1px solid rgba(201,168,76,0.2)" }}>
+                  프롤로그
+                </span>
+                <p className="text-[10px] mt-2" style={{ color: "rgba(253,246,227,0.25)" }}>시작하기 →</p>
+              </div>
+            </div>
+          </div>
+        </Link>
+
         {/* Chapter 1 card */}
         <div className="relative mb-4 group">
           <div className="absolute -inset-0.5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm pointer-events-none" style={{ background: "linear-gradient(135deg, rgba(201,168,76,0.3), transparent, rgba(201,168,76,0.1))" }} />
