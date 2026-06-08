@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef, useEffect, useCallback } from 'react';
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import * as THREE from 'three';
 import type { GameScene } from './GameCanvas';
 import { usePlayerControls } from '@/hooks/usePlayerControls';
@@ -215,7 +215,9 @@ function ResultOverlay({ choiceId, onContinue }: { choiceId: string; onContinue:
   );
 }
 
-function WildernessHUD({ faithPoints, choiceId }: { faithPoints: number; choiceId: string }) {
+function WildernessHUD({ faithEarned, choiceId, onNavigate }: {
+  faithEarned: number; choiceId: string; onNavigate: () => void;
+}) {
   const isTrust = choiceId === 'trust';
   return (
     <div className="absolute inset-0 z-30 flex flex-col items-center justify-end pb-24 pointer-events-none">
@@ -223,18 +225,23 @@ function WildernessHUD({ faithPoints, choiceId }: { faithPoints: number; choiceI
         <p className="text-xs mb-1 tracking-widest" style={{ color: 'rgba(201,168,76,0.55)' }}>
           {isTrust ? '그를 따라가라' : '길은 여전히 열려 있다'}
         </p>
-        {isTrust && faithPoints > 0 && (
-          <p className="text-[10px] mb-6" style={{ color: 'rgba(253,246,227,0.25)' }}>Faith +{faithPoints} 획득</p>
+        {isTrust && faithEarned > 0 && (
+          <p className="text-[10px] mb-6" style={{ color: 'rgba(253,246,227,0.25)' }}>
+            Faith +{faithEarned} 획득
+          </p>
         )}
-        <Link href="/chapter/1"
+        <button
+          onClick={onNavigate}
           className="inline-block px-10 py-4 rounded-2xl font-bold text-sm transition-all active:scale-[0.97] pointer-events-auto"
           style={{
             background: 'linear-gradient(135deg,#C9A84C,#F0D080,#C9A84C)',
             color: '#0F1C2E',
-            marginTop: faithPoints > 0 ? 0 : 24,
+            marginTop: faithEarned > 0 ? 0 : 24,
+            border: 'none',
+            cursor: 'pointer',
           }}>
           Chapter 1 · 엔게디 동굴로 →
-        </Link>
+        </button>
       </div>
     </div>
   );
@@ -265,6 +272,8 @@ export default function Chapter0Game() {
   const [hasMoved, setHasMoved]       = useState(false);
   const [fadeAlpha, setFadeAlpha]     = useState(0);
   const [faithGained, setFaithGained] = useState(false);
+  const [faithEarned, setFaithEarned] = useState(0); // gain this session
+  const [exitFade, setExitFade]       = useState(false);
 
   // Faith starts at 0 on both server and client to avoid hydration mismatch.
   // localStorage value is applied after mount in a useEffect.
@@ -276,6 +285,7 @@ export default function Chapter0Game() {
   const hasMovedRef = useRef(false);
   const isFirstScene = useRef(true); // skip fade on first scene mount
 
+  const router = useRouter();
   const { keys, joystick, setJoystick } = usePlayerControls();
   const { initAudio, setScene: setAudioScene, resume } = useGameAudio();
 
@@ -354,10 +364,8 @@ export default function Chapter0Game() {
   const handleChoice = useCallback((id: string, faith: number) => {
     setChoiceId(id);
     if (faith > 0) {
-      setFaithPoints(p => {
-        const next = p + faith;
-        return next;
-      });
+      setFaithPoints(p => p + faith);
+      setFaithEarned(faith);
       setFaithGained(true);
       setTimeout(() => setFaithGained(false), 2000);
     }
@@ -365,6 +373,11 @@ export default function Chapter0Game() {
   }, []);
 
   const handleResultContinue = useCallback(() => setScene('wilderness'), []);
+
+  const handleChapter1 = useCallback(() => {
+    setExitFade(true);
+    setTimeout(() => router.push('/chapter/1'), 700);
+  }, [router]);
 
   const showDialogue = scene === 'question' && dlgIndex >= 0;
   const showChoice   = scene === 'question' && dlgIndex < 0;
@@ -435,7 +448,13 @@ export default function Chapter0Game() {
       )}
 
       {scene === 'wilderness' && choiceId && (
-        <WildernessHUD faithPoints={faithPoints} choiceId={choiceId} />
+        <WildernessHUD faithEarned={faithEarned} choiceId={choiceId} onNavigate={handleChapter1} />
+      )}
+
+      {/* Chapter exit fade-to-black */}
+      {exitFade && (
+        <div className="absolute inset-0 bg-black pointer-events-none"
+          style={{ zIndex: 60, animation: 'fadeIn 0.7s ease-in both' }} />
       )}
 
       {/* Mobile controls */}
