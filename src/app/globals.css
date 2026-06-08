@@ -53,6 +53,31 @@ body {
   .glow-gold { box-shadow: 0 0 20px rgba(201,168,76,0.3); }
 }
 
+@keyframes goldGlow {
+  0%, 100% { box-shadow: 0 0 0 rgba(201,168,76,0); }
+  50% { box-shadow: 0 4px 24px rgba(201,168,76,0.35); }
+}
+@keyframes cardReveal {
+  from { opacity: 0; transform: translateY(18px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes choiceIn {
+  from { opacity: 0; transform: translateX(-14px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes twBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes progressFill {
+  from { width: 0%; }
+  to { width: var(--progress-target); }
+}
+
 @layer components {
   .gods-heart-card {
     background: var(--way-cream);
