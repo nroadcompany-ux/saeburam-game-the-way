@@ -81,6 +81,16 @@ body {
   from { width: 0%; }
   to { width: var(--progress-target); }
 }
+@keyframes titleReveal {
+  0%   { opacity: 0; }
+  8%   { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { opacity: 0; pointer-events: none; }
+}
+@keyframes titleHide {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
+}
 
 @layer components {
   .gods-heart-card {

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import * as THREE from 'three';
 import type { GameScene } from './GameCanvas';
 import { usePlayerControls } from '@/hooks/usePlayerControls';
+import { useGameAudio } from '@/hooks/useGameAudio';
 import VirtualJoystick from './VirtualJoystick';
 
 const GameCanvas = dynamic(() => import('./GameCanvas'), { ssr: false });
@@ -21,7 +22,7 @@ const ENCOUNTER_LINES = [
 const DIVINE_QUESTION = {
   text: '너의 힘으로 건너겠느냐?\n아니면 내 손을 잡겠느냐?',
   choices: [
-    { id: 'self',  label: '내 힘으로 건너겠다',  sub: '나는 포기하지 않는다',    faith: -1 },
+    { id: 'self',  label: '내 힘으로 건너겠다',  sub: '나는 포기하지 않는다',    faith: 0  },
     { id: 'trust', label: '손을 잡겠다',          sub: '내 힘으론 부족함을 안다', faith: 3  },
   ],
 };
@@ -30,6 +31,48 @@ const RESULT_TEXT: Record<string, string[]> = {
   self:  ['결심이 확고하다.', '', '하지만 그 손은 여전히 거기 있다.', '', '언제든 잡을 수 있다.'],
   trust: ['손을 잡는 순간,', '어둠이 물러났다.', '', '이것이 믿음이다.'],
 };
+
+// ── Title Screen ────────────────────────────────────────────────
+// Stateless CSS-only overlay — always mounts, fades out automatically.
+// Uses a mount-key trick: each time this component renders fresh (page visit),
+// the animation restarts because the DOM element is recreated.
+function TitleScreen() {
+  return (
+    <div
+      key="title-overlay"
+      className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black select-none pointer-events-none"
+      style={{ animation: 'titleReveal 5.5s ease-in-out forwards' }}
+    >
+      <div className="relative w-14 h-14 mb-10"
+        style={{ animation: 'fadeIn 0.8s 0.3s ease-out both' }}>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-[1.5px] h-14"
+            style={{ background: 'linear-gradient(to bottom, transparent, #C9A84C, transparent)' }} />
+        </div>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="h-[1.5px] w-10 -translate-y-3"
+            style={{ background: 'linear-gradient(to right, transparent, #C9A84C, transparent)' }} />
+        </div>
+      </div>
+      <p className="text-[10px] font-mono tracking-[0.5em] mb-3"
+        style={{ color: 'rgba(201,168,76,0.5)', animation: 'fadeUp 0.7s 0.6s ease-out both' }}>
+        CHAPTER 00 · PROLOGUE
+      </p>
+      <h1 className="font-bold mb-2 tracking-[0.15em]"
+        style={{ fontSize: 'clamp(2rem,8vw,3.5rem)', color: 'rgba(253,246,227,0.9)', fontFamily: 'Georgia, serif', animation: 'fadeUp 0.7s 0.8s ease-out both' }}>
+        심판대
+      </h1>
+      <p className="text-xs mb-16 tracking-widest"
+        style={{ color: 'rgba(253,246,227,0.3)', animation: 'fadeUp 0.7s 1s ease-out both' }}>
+        THE WAY
+      </p>
+      <p className="text-[11px] tracking-[0.3em]"
+        style={{ color: 'rgba(253,246,227,0.22)', animation: 'twBlink 2s 1.8s ease-in-out infinite both' }}>
+        잠시 후 시작됩니다
+      </p>
+    </div>
+  );
+}
 
 // ── HUD Components ──────────────────────────────────────────────
 function SceneLabel({ scene }: { scene: GameScene }) {
@@ -48,7 +91,7 @@ function SceneLabel({ scene }: { scene: GameScene }) {
   );
 }
 
-function FaithMeter({ points }: { points: number }) {
+function FaithMeter({ points, gained }: { points: number; gained: boolean }) {
   const pct = Math.min((points / 5) * 100, 100);
   return (
     <div className="absolute z-20 pointer-events-none"
@@ -57,9 +100,19 @@ function FaithMeter({ points }: { points: number }) {
         style={{ color: 'rgba(201,168,76,0.45)' }}>Faith</p>
       <div className="w-20 h-1 rounded-full overflow-hidden"
         style={{ background: 'rgba(255,255,255,0.08)' }}>
-        <div className="h-full rounded-full transition-all duration-700"
-          style={{ width: `${pct}%`, background: 'linear-gradient(to right,#C9A84C,#F0D080)' }} />
+        <div className="h-full rounded-full"
+          style={{
+            width: `${pct}%`,
+            background: 'linear-gradient(to right,#C9A84C,#F0D080)',
+            transition: 'width 1s cubic-bezier(0.34,1.56,0.64,1)',
+          }} />
       </div>
+      {gained && (
+        <p className="text-[9px] mt-1 font-bold"
+          style={{ color: '#F0D080', animation: 'fadeUp 0.5s ease-out both' }}>
+          +Faith
+        </p>
+      )}
     </div>
   );
 }
@@ -86,7 +139,7 @@ function DialogueBox({ speaker, text, onNext, isLast }: {
     <div className="absolute left-0 right-0 z-30 px-4"
       style={{ bottom: 'max(20px, env(safe-area-inset-bottom))', paddingBottom: 64, animation: 'fadeUp 0.3s ease-out both' }}>
       <div className="max-w-lg mx-auto rounded-2xl p-5"
-        style={{ background: 'rgba(4,8,20,0.93)', border: '1px solid rgba(201,168,76,0.35)', backdropFilter: 'blur(10px)' }}>
+        style={{ background: 'rgba(4,8,20,0.95)', border: '1px solid rgba(201,168,76,0.35)', backdropFilter: 'blur(10px)' }}>
         <p className="text-xs font-bold tracking-widest mb-2" style={{ color: '#C9A84C' }}>{speaker}</p>
         <p className="text-sm leading-relaxed mb-4"
           style={{ color: 'rgba(253,246,227,0.88)', fontFamily: 'Georgia,serif', minHeight: '2.5rem' }}>
@@ -162,15 +215,24 @@ function ResultOverlay({ choiceId, onContinue }: { choiceId: string; onContinue:
   );
 }
 
-function WildernessHUD({ faithPoints }: { faithPoints: number }) {
+function WildernessHUD({ faithPoints, choiceId }: { faithPoints: number; choiceId: string }) {
+  const isTrust = choiceId === 'trust';
   return (
-    <div className="absolute inset-0 z-30 flex flex-col items-center justify-end pb-20 pointer-events-none">
+    <div className="absolute inset-0 z-30 flex flex-col items-center justify-end pb-24 pointer-events-none">
       <div className="text-center" style={{ animation: 'fadeUp 1.2s 0.6s ease-out both' }}>
-        <p className="text-xs mb-1 tracking-widest" style={{ color: 'rgba(201,168,76,0.5)' }}>그를 따라가라</p>
-        <p className="text-[10px] mb-6" style={{ color: 'rgba(253,246,227,0.25)' }}>Faith +{faithPoints} 획득</p>
+        <p className="text-xs mb-1 tracking-widest" style={{ color: 'rgba(201,168,76,0.55)' }}>
+          {isTrust ? '그를 따라가라' : '길은 여전히 열려 있다'}
+        </p>
+        {isTrust && faithPoints > 0 && (
+          <p className="text-[10px] mb-6" style={{ color: 'rgba(253,246,227,0.25)' }}>Faith +{faithPoints} 획득</p>
+        )}
         <Link href="/chapter/1"
           className="inline-block px-10 py-4 rounded-2xl font-bold text-sm transition-all active:scale-[0.97] pointer-events-auto"
-          style={{ background: 'linear-gradient(135deg,#C9A84C,#F0D080,#C9A84C)', color: '#0F1C2E' }}>
+          style={{
+            background: 'linear-gradient(135deg,#C9A84C,#F0D080,#C9A84C)',
+            color: '#0F1C2E',
+            marginTop: faithPoints > 0 ? 0 : 24,
+          }}>
           Chapter 1 · 엔게디 동굴로 →
         </Link>
       </div>
@@ -196,26 +258,54 @@ function MovementHint({ show }: { show: boolean }) {
 
 // ── Main ─────────────────────────────────────────────────────────
 export default function Chapter0Game() {
-  const [scene, setScene]           = useState<GameScene>('awakening');
-  const [dlgIndex, setDlgIndex]     = useState(-1);
-  const [choiceId, setChoiceId]     = useState<string | null>(null);
-  const [faithPoints, setFaithPoints] = useState(0);
-  const [nearNPC, setNearNPC]       = useState(false);
-  const [hasMoved, setHasMoved]     = useState(false);
+  const [scene, setScene] = useState<GameScene>('awakening');
+  const [dlgIndex, setDlgIndex]       = useState(-1);
+  const [choiceId, setChoiceId]       = useState<string | null>(null);
+  const [nearNPC, setNearNPC]         = useState(false);
+  const [hasMoved, setHasMoved]       = useState(false);
+  const [fadeAlpha, setFadeAlpha]     = useState(0);
+  const [faithGained, setFaithGained] = useState(false);
 
-  // Refs for Three.js loop (avoids stale closures)
-  const sceneRef   = useRef<GameScene>('awakening');
-  const pausedRef  = useRef(false);
-  const nearNPCRef = useRef(false);
+  // Persist faith across sessions
+  const [faithPoints, setFaithPoints] = useState<number>(() => {
+    if (typeof window !== 'undefined') {
+      return parseInt(localStorage.getItem('tw_faith') ?? '0', 10);
+    }
+    return 0;
+  });
+
+  const sceneRef    = useRef<GameScene>('awakening');
+  const pausedRef   = useRef(false);
+  const nearNPCRef  = useRef(false);
   const hasMovedRef = useRef(false);
+  const isFirstScene = useRef(true); // skip fade on first scene mount
 
   const { keys, joystick, setJoystick } = usePlayerControls();
+  const { initAudio, setScene: setAudioScene, resume } = useGameAudio();
 
-  // Keep refs in sync with state
-  useEffect(() => { sceneRef.current  = scene;   pausedRef.current = (scene === 'question' || scene === 'result' || scene === 'wilderness'); }, [scene]);
+  // Sync refs + audio on scene change
+  useEffect(() => {
+    sceneRef.current  = scene;
+    pausedRef.current = scene === 'question' || scene === 'result' || scene === 'wilderness';
+    resume();
+    setAudioScene(scene);
+  }, [scene, setAudioScene, resume]);
   useEffect(() => { nearNPCRef.current = nearNPC; }, [nearNPC]);
 
-  // Position callback — stable ref so Three.js loop always has latest version
+  // Scene fade on change
+  useEffect(() => {
+    if (isFirstScene.current) { isFirstScene.current = false; return; }
+    setFadeAlpha(1);
+    const t = setTimeout(() => setFadeAlpha(0), 320);
+    return () => clearTimeout(t);
+  }, [scene]);
+
+  // Persist faith
+  useEffect(() => {
+    localStorage.setItem('tw_faith', String(faithPoints));
+  }, [faithPoints]);
+
+  // Position callback
   const onPositionChangeRef = useRef<(pos: THREE.Vector3) => void>(() => {});
   useEffect(() => {
     onPositionChangeRef.current = (pos: THREE.Vector3) => {
@@ -224,6 +314,7 @@ export default function Chapter0Game() {
       if (!hasMovedRef.current && (Math.abs(pos.x) > 0.3 || Math.abs(z) > 0.3)) {
         hasMovedRef.current = true;
         setHasMoved(true);
+        initAudio();   // start audio on first user interaction
       }
       if (sc === 'awakening' && z < -9)  setScene('cliff');
       if (sc === 'cliff'     && z < -17) setScene('encounter');
@@ -237,16 +328,17 @@ export default function Chapter0Game() {
     };
   });
 
-  // E key → start dialogue
+  // E key → dialogue (also init audio on first keypress)
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      initAudio(); // start audio on any key press
       if ((e.code === 'KeyE' || e.code === 'Space') && sceneRef.current === 'encounter' && nearNPCRef.current) {
         beginDialogue();
       }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, []);
+  }, [initAudio]);
 
   const beginDialogue = useCallback(() => {
     setScene('question');
@@ -259,7 +351,14 @@ export default function Chapter0Game() {
 
   const handleChoice = useCallback((id: string, faith: number) => {
     setChoiceId(id);
-    setFaithPoints(p => Math.max(0, p + faith));
+    if (faith > 0) {
+      setFaithPoints(p => {
+        const next = p + faith;
+        return next;
+      });
+      setFaithGained(true);
+      setTimeout(() => setFaithGained(false), 2000);
+    }
     setScene('result');
   }, []);
 
@@ -267,10 +366,13 @@ export default function Chapter0Game() {
 
   const showDialogue = scene === 'question' && dlgIndex >= 0;
   const showChoice   = scene === 'question' && dlgIndex < 0;
-  const paused       = scene === 'question' || scene === 'result' || scene === 'wilderness';
+  const darkScene    = ['awakening', 'cliff', 'encounter', 'question'].includes(scene);
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-black">
+      {/* Title screen — pure CSS overlay, always mounts, fades automatically */}
+      <TitleScreen />
+
       {/* 3D Canvas */}
       <div className="absolute inset-0">
         <GameCanvas
@@ -280,14 +382,31 @@ export default function Chapter0Game() {
           controls={keys}
           joystick={joystick}
           onPositionChange={onPositionChangeRef}
+          onReady={() => {}}
         />
       </div>
 
-      {/* Static HUD */}
-      <SceneLabel scene={scene} />
-      <FaithMeter points={faithPoints} />
+      {/* Scene fade overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          zIndex: 48,
+          background: 'black',
+          opacity: fadeAlpha,
+          transition: fadeAlpha === 1 ? 'opacity 160ms ease-in' : 'opacity 500ms ease-out',
+        }}
+      />
 
-      {/* Desktop controls hint */}
+      {/* Vignette for dark/atmospheric scenes */}
+      {darkScene && (
+        <div className="absolute inset-0 z-10 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.65) 100%)' }} />
+      )}
+
+      {/* HUD — always visible */}
+      <SceneLabel scene={scene} />
+      <FaithMeter points={faithPoints} gained={faithGained} />
+
       <div className="absolute bottom-3 inset-x-0 flex justify-center z-20 pointer-events-none">
         <p className="text-[10px] tracking-widest hidden md:block"
           style={{ color: 'rgba(253,246,227,0.15)' }}>
@@ -313,7 +432,9 @@ export default function Chapter0Game() {
         <ResultOverlay choiceId={choiceId} onContinue={handleResultContinue} />
       )}
 
-      {scene === 'wilderness' && <WildernessHUD faithPoints={faithPoints} />}
+      {scene === 'wilderness' && choiceId && (
+        <WildernessHUD faithPoints={faithPoints} choiceId={choiceId} />
+      )}
 
       {/* Mobile controls */}
       <div className="md:hidden">
