@@ -3,25 +3,59 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0D1829;
+  --foreground: #F5EDD6;
+  --way-gold: #C9A84C;
+  --way-navy: #1A2B4A;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
+  min-height: 100vh;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .text-gold {
+    color: var(--way-gold);
+  }
+
+  .bg-way {
+    background: linear-gradient(135deg, #1A2B4A 0%, #0D1829 100%);
+  }
+
+  .border-gold {
+    border-color: var(--way-gold);
+  }
+
+  .glow-gold {
+    box-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-way-gold text-way-navy font-bold rounded-lg hover:bg-way-gold-light transition-colors duration-200 cursor-pointer;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 border-2 border-way-gold text-way-gold font-bold rounded-lg hover:bg-way-gold hover:text-way-navy transition-colors duration-200 cursor-pointer;
+  }
+
+  .card {
+    @apply bg-way-navy-light border border-way-gold/30 rounded-xl p-6 shadow-lg;
+  }
+
+  .verse-text {
+    @apply font-serif text-way-parchment italic leading-relaxed;
   }
 }
