@@ -266,13 +266,9 @@ export default function Chapter0Game() {
   const [fadeAlpha, setFadeAlpha]     = useState(0);
   const [faithGained, setFaithGained] = useState(false);
 
-  // Persist faith across sessions
-  const [faithPoints, setFaithPoints] = useState<number>(() => {
-    if (typeof window !== 'undefined') {
-      return parseInt(localStorage.getItem('tw_faith') ?? '0', 10);
-    }
-    return 0;
-  });
+  // Faith starts at 0 on both server and client to avoid hydration mismatch.
+  // localStorage value is applied after mount in a useEffect.
+  const [faithPoints, setFaithPoints] = useState(0);
 
   const sceneRef    = useRef<GameScene>('awakening');
   const pausedRef   = useRef(false);
@@ -300,9 +296,15 @@ export default function Chapter0Game() {
     return () => clearTimeout(t);
   }, [scene]);
 
-  // Persist faith
+  // Load faith from localStorage after mount (avoids SSR hydration mismatch)
   useEffect(() => {
-    localStorage.setItem('tw_faith', String(faithPoints));
+    const stored = parseInt(localStorage.getItem('tw_faith') ?? '0', 10);
+    if (stored > 0) setFaithPoints(stored);
+  }, []);
+
+  // Persist faith on change
+  useEffect(() => {
+    if (faithPoints > 0) localStorage.setItem('tw_faith', String(faithPoints));
   }, [faithPoints]);
 
   // Position callback

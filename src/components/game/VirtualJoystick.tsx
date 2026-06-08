@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, useState } from 'react';
 
 interface Props {
   onMove: (x: number, y: number) => void;
@@ -7,33 +7,37 @@ interface Props {
 }
 
 export default function VirtualJoystick({ onMove, onInteract }: Props) {
-  const baseRef = useRef<HTMLDivElement>(null);
-  const knobRef = useRef<HTMLDivElement>(null);
   const activeTouch = useRef<number | null>(null);
-  const center = useRef({ x: 0, y: 0 });
-  const MAX = 44;
+  const [base, setBase] = useState<{ x: number; y: number } | null>(null);
+  const [knob, setKnob] = useState({ x: 0, y: 0 });
+  const MAX = 48;
 
   const start = useCallback((e: React.TouchEvent) => {
     if (activeTouch.current !== null) return;
     const t = e.changedTouches[0];
     activeTouch.current = t.identifier;
-    const rect = baseRef.current!.getBoundingClientRect();
-    center.current = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+    setBase({ x: t.clientX, y: t.clientY });
+    setKnob({ x: 0, y: 0 });
   }, []);
 
   const move = useCallback((e: React.TouchEvent) => {
     e.preventDefault();
+    if (activeTouch.current === null) return;
     for (let i = 0; i < e.changedTouches.length; i++) {
       const t = e.changedTouches[i];
       if (t.identifier !== activeTouch.current) continue;
-      const dx = t.clientX - center.current.x;
-      const dy = t.clientY - center.current.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      const ratio = Math.min(dist, MAX) / Math.max(dist, 0.001);
-      const cx = dx * ratio;
-      const cy = dy * ratio;
-      if (knobRef.current) knobRef.current.style.transform = `translate(${cx}px,${cy}px)`;
-      onMove(cx / MAX, cy / MAX);
+      setBase(b => {
+        if (!b) return b;
+        const dx = t.clientX - b.x;
+        const dy = t.clientY - b.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const ratio = Math.min(dist, MAX) / Math.max(dist, 0.001);
+        const cx = dx * ratio;
+        const cy = dy * ratio;
+        setKnob({ x: cx, y: cy });
+        onMove(cx / MAX, cy / MAX);
+        return b;
+      });
     }
   }, [onMove]);
 
@@ -41,46 +45,72 @@ export default function VirtualJoystick({ onMove, onInteract }: Props) {
     for (let i = 0; i < e.changedTouches.length; i++) {
       if (e.changedTouches[i].identifier === activeTouch.current) {
         activeTouch.current = null;
-        if (knobRef.current) knobRef.current.style.transform = 'translate(0,0)';
+        setBase(null);
+        setKnob({ x: 0, y: 0 });
         onMove(0, 0);
       }
     }
   }, [onMove]);
 
   return (
-    <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between px-6 pb-8 z-20"
-      style={{ touchAction: 'none' }}>
-      {/* Left: Movement joystick */}
+    <div
+      className="absolute inset-0 z-20"
+      style={{ touchAction: 'none', pointerEvents: 'none' }}
+    >
+      {/* Invisible left-half touch zone for movement */}
       <div
-        ref={baseRef}
-        className="relative w-28 h-28 rounded-full flex items-center justify-center select-none"
-        style={{ background: 'rgba(255,255,255,0.05)', border: '1.5px solid rgba(255,255,255,0.12)' }}
+        className="absolute left-0 top-0 bottom-0"
+        style={{ width: '55%', pointerEvents: 'auto' }}
         onTouchStart={start}
         onTouchMove={move}
         onTouchEnd={end}
         onTouchCancel={end}
-      >
-        <div
-          ref={knobRef}
-          className="w-12 h-12 rounded-full pointer-events-none"
-          style={{
-            background: 'rgba(201,168,76,0.4)',
-            border: '1.5px solid rgba(201,168,76,0.7)',
-          }}
-        />
-      </div>
+      />
 
-      {/* Right: Interact button */}
+      {/* Floating joystick base — appears at touch origin */}
+      {base && (
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            left: base.x - 44,
+            top: base.y - 44,
+            width: 88,
+            height: 88,
+            borderRadius: '50%',
+            background: 'rgba(255,255,255,0.04)',
+            border: '1.5px solid rgba(255,255,255,0.12)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <div
+            style={{
+              width: 36,
+              height: 36,
+              borderRadius: '50%',
+              background: 'rgba(201,168,76,0.45)',
+              border: '1.5px solid rgba(201,168,76,0.7)',
+              transform: `translate(${knob.x}px, ${knob.y}px)`,
+              transition: 'transform 0.02s linear',
+            }}
+          />
+        </div>
+      )}
+
+      {/* Interact button — right side, always visible when onInteract provided */}
       {onInteract && (
         <button
-          onTouchStart={(e) => { e.preventDefault(); onInteract(); }}
-          className="w-16 h-16 rounded-full flex items-center justify-center font-bold text-xs select-none active:scale-90 transition-transform"
+          className="absolute right-6 bottom-20 w-16 h-16 rounded-full flex items-center justify-center font-bold text-xs select-none active:scale-90 transition-transform"
           style={{
             background: 'rgba(201,168,76,0.15)',
             border: '1.5px solid rgba(201,168,76,0.5)',
             color: '#C9A84C',
             touchAction: 'none',
+            pointerEvents: 'auto',
+            animation: 'fadeUp 0.3s ease-out both',
           }}
+          onTouchStart={(e) => { e.preventDefault(); onInteract(); }}
         >
           대화
         </button>

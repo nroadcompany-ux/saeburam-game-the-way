@@ -60,6 +60,17 @@ function buildHumanoid(parent: THREE.Object3D, mat: THREE.Material, scale = 1): 
   const lLeg = makeLimb(new THREE.CylinderGeometry(0.09, 0.07, 0.6,  8), -0.14, 0.47, -0.30);
   const rLeg = makeLimb(new THREE.CylinderGeometry(0.09, 0.07, 0.6,  8),  0.14, 0.47, -0.30);
 
+  // Feet
+  const footGeo = new THREE.BoxGeometry(0.13, 0.06, 0.2);
+  const addFoot = (lx: number, legPivot: THREE.Group) => {
+    const foot = new THREE.Mesh(footGeo, mat);
+    foot.position.set(lx * 0.03, -0.61, 0.05);
+    foot.castShadow = true;
+    legPivot.add(foot);
+  };
+  addFoot(-1, lLeg);
+  addFoot(1,  rLeg);
+
   parent.add(g);
   return { group: g, lArm, rArm, lLeg, rLeg };
 }
