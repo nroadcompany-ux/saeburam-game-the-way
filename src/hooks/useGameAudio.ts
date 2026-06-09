@@ -85,13 +85,13 @@ const SCENE_AUDIO: Record<GameScene, {
 export function useGameAudio() {
   const audioRef = useRef<AudioNodes | null>(null);
   const currentScene = useRef<GameScene | null>(null);
-  const transitionRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const initAudio = useCallback(() => {
     if (audioRef.current) return;
 
     try {
-      const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      const ctx = new AudioCtx();
       const master = ctx.createGain();
       master.gain.setValueAtTime(0, ctx.currentTime);
       master.connect(ctx.destination);
