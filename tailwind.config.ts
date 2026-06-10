@@ -24,6 +24,14 @@ const config: Config = {
           crimson: "#8B1A1A",
           olive: "#4A6741",
         },
+        // Emotion Selection UI colors
+        'dark-navy': '#1A1F3A',
+        'cream': '#F5F1E8',
+        'gold': '#D4AF37',
+        'dark-red': '#2A1F1F',
+        'dark-blue': '#1A2847',
+        'emotion-purple': '#1F2340',
+        'sub-text': '#D4C8B8',
       },
       fontFamily: {
         serif: ["Georgia", "serif"],
