@@ -19,6 +19,11 @@ interface Legacy {
     reference: string;
     character: string;
   };
+  obedience: {
+    id: string;
+    action: string;
+    description: string;
+  };
   testimony: string;
   created_at: string;
 }
@@ -33,18 +38,21 @@ export default function LegacyPage() {
     intensity: number;
     prayer: string;
     whisper: any;
+    obedience: any;
   } | null>(null);
 
   useEffect(() => {
     const emotion = JSON.parse(sessionStorage.getItem('chapter0_emotion') || '{}');
     const prayer = sessionStorage.getItem('chapter0_prayer') || '';
     const whisper = JSON.parse(sessionStorage.getItem('chapter0_whisper') || '{}');
+    const obedience = JSON.parse(sessionStorage.getItem('chapter0_obedience') || '{}');
 
     setData({
       emotion,
       intensity: emotion.intensity || 1,
       prayer,
       whisper,
+      obedience,
     });
     setIsLoading(false);
   }, []);
@@ -68,6 +76,11 @@ export default function LegacyPage() {
         reference: data.whisper.reference,
         character: data.whisper.character,
       },
+      obedience: {
+        id: data.obedience.id,
+        action: data.obedience.action,
+        description: data.obedience.description,
+      },
       testimony,
       created_at: new Date().toISOString(),
     };
@@ -81,6 +94,7 @@ export default function LegacyPage() {
     sessionStorage.removeItem('chapter0_emotion');
     sessionStorage.removeItem('chapter0_prayer');
     sessionStorage.removeItem('chapter0_whisper');
+    sessionStorage.removeItem('chapter0_obedience');
 
     setIsSaved(true);
 
@@ -129,7 +143,7 @@ export default function LegacyPage() {
         </p>
 
         {/* 여정 요약 */}
-        <div className="bg-emotion-purple rounded-lg p-6 mb-8 border border-gold">
+        <div className="bg-emotion-purple rounded-lg p-6 mb-8 border border-gold space-y-4">
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div>
               <p className="text-xs text-sub-text mb-1">감정</p>
@@ -143,15 +157,25 @@ export default function LegacyPage() {
                 {['한 스푼', '두 스푼', '세 스푼'][data?.intensity ? data.intensity - 1 : 0]}
               </p>
             </div>
-            {data?.whisper?.reference && (
-              <div className="col-span-2">
-                <p className="text-xs text-sub-text mb-1">말씀</p>
-                <p className="text-gold text-xs font-bold">
-                  {data.whisper.reference} - {data.whisper.character}
-                </p>
-              </div>
-            )}
           </div>
+
+          {data?.whisper?.reference && (
+            <div>
+              <p className="text-xs text-sub-text mb-2">말씀</p>
+              <p className="text-gold text-xs font-bold">
+                {data.whisper.reference} - {data.whisper.character}
+              </p>
+            </div>
+          )}
+
+          {data?.obedience?.action && (
+            <div className="pt-4 border-t border-gold">
+              <p className="text-xs text-sub-text mb-2">순종</p>
+              <p className="text-cream font-bold text-sm">
+                {data.obedience.action}
+              </p>
+            </div>
+          )}
         </div>
 
         {/* 간증 입력 */}

@@ -27,7 +27,7 @@ export default function WhisperPage() {
     if (whisper) {
       sessionStorage.setItem('chapter0_whisper', JSON.stringify(whisper));
     }
-    router.push('/chapter0/legacy');
+    router.push('/chapter0/obedience');
   };
 
   if (isLoading) {
