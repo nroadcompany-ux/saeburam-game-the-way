@@ -4,14 +4,14 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { getCompanion, type Companion } from '@/data/companion-engine';
 
-type Step = 'enter' | 'line' | 'story' | 'courage';
+type Phase = 'appear' | 'line1' | 'line2' | 'done';
 
 export default function CompanionPage() {
   const router = useRouter();
   const [companion, setCompanion] = useState<Companion | null>(null);
   const [emotion, setEmotion] = useState<any>(null);
-  const [step, setStep] = useState<Step>('enter');
-  const [visible, setVisible] = useState(false);
+  const [phase, setPhase] = useState<Phase>('appear');
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     const saved = sessionStorage.getItem('chapter0_emotion');
@@ -19,115 +19,120 @@ export default function CompanionPage() {
     const parsed = JSON.parse(saved);
     setEmotion(parsed);
     setCompanion(getCompanion(parsed.id));
-    // 진입 애니메이션
-    setTimeout(() => setVisible(true), 100);
+    setTimeout(() => setShow(true), 80);
   }, [router]);
 
-  const next = () => {
-    setVisible(false);
-    setTimeout(() => {
-      if (step === 'enter') setStep('line');
-      else if (step === 'line') setStep('story');
-      else if (step === 'story') setStep('courage');
-      else router.push('/chapter0/prayer');
-      setTimeout(() => setVisible(true), 50);
-    }, 300);
+  const advance = () => {
+    if (phase === 'appear') {
+      setShow(false);
+      setTimeout(() => { setPhase('line1'); setShow(true); }, 250);
+    } else if (phase === 'line1') {
+      setShow(false);
+      setTimeout(() => { setPhase('line2'); setShow(true); }, 250);
+    } else if (phase === 'line2') {
+      setPhase('done');
+    } else {
+      router.push('/chapter0/prayer');
+    }
   };
 
   if (!companion || !emotion) {
     return (
       <div className="min-h-screen bg-dark-navy flex items-center justify-center">
-        <div className="w-10 h-10 border-4 border-gold border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-gold border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
 
   return (
     <div
-      className="min-h-screen bg-dark-navy flex flex-col items-center justify-center p-6 cursor-pointer select-none"
-      onClick={next}
+      className="min-h-screen flex flex-col items-center justify-center p-8 cursor-pointer"
+      style={{ backgroundColor: '#0D1120' }}
+      onClick={phase !== 'done' ? advance : undefined}
     >
-      <div
-        className="max-w-md w-full text-center transition-all duration-300"
-        style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(12px)' }}
-      >
-        {/* 진입 */}
-        {step === 'enter' && (
-          <>
-            <div className="text-7xl mb-6">{companion.emoji}</div>
-            <p
-              className="text-4xl font-bold mb-4"
-              style={{ color: companion.color }}
-            >
-              {companion.name}
-            </p>
-            <p className="text-sub-text text-sm mt-8">화면을 터치하세요</p>
-          </>
-        )}
+      {/* 이름 등장 단계 */}
+      {phase === 'appear' && (
+        <div
+          className="text-center transition-all duration-500"
+          style={{ opacity: show ? 1 : 0, transform: show ? 'translateY(0)' : 'translateY(20px)' }}
+        >
+          <div className="text-6xl mb-6">{companion.emoji}</div>
+          <p className="text-xs tracking-[0.3em] uppercase mb-3" style={{ color: companion.color, opacity: 0.6 }}>
+            {companion.era}
+          </p>
+          <p className="text-5xl font-bold" style={{ color: companion.color }}>
+            {companion.name}
+          </p>
+          <p className="text-sub-text text-sm mt-12 animate-pulse">터치하여 계속</p>
+        </div>
+      )}
 
-        {/* 공감 한 마디 */}
-        {step === 'line' && (
-          <>
-            <div className="text-5xl mb-8">{companion.emoji}</div>
-            <p
-              className="text-3xl font-bold leading-relaxed"
-              style={{ color: companion.color }}
-            >
-              "{companion.line}"
-            </p>
-            <p
-              className="text-sm mt-2 font-semibold"
-              style={{ color: companion.color, opacity: 0.7 }}
-            >
-              — {companion.name}
-            </p>
-          </>
-        )}
+      {/* 첫 번째 말 */}
+      {phase === 'line1' && (
+        <div
+          className="text-center max-w-sm transition-all duration-500"
+          style={{ opacity: show ? 1 : 0, transform: show ? 'translateY(0)' : 'translateY(16px)' }}
+        >
+          <p className="text-2xl mb-8" style={{ color: companion.color, opacity: 0.5 }}>
+            {companion.emoji} {companion.name}
+          </p>
+          <p className="text-cream text-3xl font-bold leading-snug">
+            "{companion.line1}"
+          </p>
+          <p className="text-sub-text text-sm mt-12 animate-pulse">터치하여 계속</p>
+        </div>
+      )}
 
-        {/* 짧은 이야기 */}
-        {step === 'story' && (
-          <>
-            <p className="text-cream text-lg leading-loose whitespace-pre-line mb-6">
-              {companion.story}
-            </p>
-            <p
-              className="text-sm font-bold"
-              style={{ color: companion.color }}
-            >
-              — {companion.name}
-            </p>
-          </>
-        )}
+      {/* 두 번째 말 */}
+      {(phase === 'line2' || phase === 'done') && (
+        <div
+          className="text-center max-w-sm transition-all duration-500"
+          style={{ opacity: show ? 1 : 0, transform: show ? 'translateY(0)' : 'translateY(16px)' }}
+        >
+          <p className="text-2xl mb-8" style={{ color: companion.color, opacity: 0.5 }}>
+            {companion.emoji} {companion.name}
+          </p>
+          <p className="text-cream text-2xl font-bold leading-snug mb-3">
+            "{companion.line1}"
+          </p>
+          <p
+            className="text-xl leading-snug transition-all duration-700"
+            style={{
+              color: companion.color,
+              opacity: phase === 'done' ? 1 : 0.5,
+              fontWeight: phase === 'done' ? 700 : 400,
+            }}
+          >
+            "{companion.line2}"
+          </p>
 
-        {/* 용기 */}
-        {step === 'courage' && (
-          <>
-            <p
-              className="text-xl leading-relaxed whitespace-pre-line mb-10 font-bold"
-              style={{ color: companion.color }}
-            >
-              {companion.courage}
-            </p>
+          {phase === 'line2' && (
+            <p className="text-sub-text text-sm mt-12 animate-pulse">터치하여 계속</p>
+          )}
+
+          {phase === 'done' && (
             <button
-              onClick={(e) => { e.stopPropagation(); next(); }}
-              className="bg-gold text-dark-navy px-10 py-3 rounded-lg font-bold hover:bg-yellow-400 transition-colors"
+              onClick={() => router.push('/chapter0/prayer')}
+              className="mt-14 px-12 py-3 rounded-lg font-bold text-dark-navy transition-all duration-200 hover:scale-105 active:scale-95"
+              style={{ backgroundColor: companion.color }}
             >
               계속하기
             </button>
-          </>
-        )}
-      </div>
+          )}
+        </div>
+      )}
 
-      {/* 하단 진행 표시 */}
-      {step !== 'courage' && (
-        <div className="fixed bottom-10 flex gap-2">
-          {(['enter', 'line', 'story', 'courage'] as Step[]).map((s) => (
+      {/* 단계 점 */}
+      {phase !== 'done' && (
+        <div className="fixed bottom-8 flex gap-2">
+          {(['appear', 'line1', 'line2'] as Phase[]).map((p) => (
             <div
-              key={s}
-              className="w-2 h-2 rounded-full transition-all duration-300"
+              key={p}
+              className="rounded-full transition-all duration-300"
               style={{
-                backgroundColor: s === step ? '#D4AF37' : '#D4C8B840',
-                transform: s === step ? 'scale(1.4)' : 'scale(1)',
+                width: p === phase ? '20px' : '6px',
+                height: '6px',
+                backgroundColor: p === phase ? companion.color : '#D4C8B830',
               }}
             />
           ))}
