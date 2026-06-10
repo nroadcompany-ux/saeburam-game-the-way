@@ -30,7 +30,7 @@ export default function EmotionPage() {
           intensity: selectedIntensity,
         })
       );
-      router.push('/chapter0/prayer');
+      router.push('/chapter0/companion');
     }
   };
 

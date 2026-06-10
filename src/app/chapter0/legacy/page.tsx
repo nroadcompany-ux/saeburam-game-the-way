@@ -67,7 +67,7 @@ export default function LegacyPage() {
         name: data.emotion.name,
         emoji: data.emotion.emoji,
       },
-      intensity: data.intensity,
+      intensity: data.intensity as 1 | 2 | 3,
       prayer: data.prayer,
       whisper: {
         id: data.whisper.id,
