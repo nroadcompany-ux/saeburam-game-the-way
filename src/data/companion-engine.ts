@@ -1,98 +1,331 @@
 export interface Companion {
+  id: string;
   emotionId: string;
   name: string;
-  era: string;       // 시대 배경 (짧게)
+  subtitle: string;       // 한 줄 소개
+  era: string;
   emoji: string;
-  line1: string;     // 첫 번째 공감
-  line2: string;     // 두 번째 공감
+  introLine: string;      // 등장 소개
+  line1: string;          // 첫 번째 공감
+  line2: string;          // 두 번째 공감
+  relatedVerse: string;   // 관련 성경 구절
+  relatedStory: string;   // 관련 성경 이야기 요약
+  imageKey: string;       // 미래 이미지 키
   color: string;
 }
 
+// ─── 9 Core Companions (현재 사용 중) ──────────────────────────────────────────
+
 export const COMPANIONS: Record<string, Companion> = {
   fear: {
+    id: 'moses',
     emotionId: 'fear',
     name: '모세',
+    subtitle: '두려움을 이긴 해방자',
     era: '출애굽기',
     emoji: '🔥',
+    introLine: '나는 떨리는 손으로 그 길을 걸었다.',
     line1: '나도 두려웠다.',
     line2: '나는 말도 잘 못했다.',
+    relatedVerse: '여호와께서 이르시되 나는 너와 함께 하리라 — 출애굽기 3:12',
+    relatedStory: '모세는 불타는 떨기나무 앞에서 두려워했지만 하나님의 부름에 응했다.',
+    imageKey: 'moses',
     color: '#E8C97A',
   },
   loneliness: {
+    id: 'david',
     emotionId: 'loneliness',
     name: '다윗',
+    subtitle: '광야에서 시를 쓴 왕',
     era: '시편',
     emoji: '🌙',
+    introLine: '나는 들판에서 혼자 하늘을 바라보았다.',
     line1: '나도 외로웠다.',
     line2: '사람보다 하나님께 더 많이 울었다.',
+    relatedVerse: '주께서 나의 유리함을 계산하셨으니 — 시편 56:8',
+    relatedStory: '다윗은 광야를 피해 다니며 시편 속에 외로움을 쏟아냈다.',
+    imageKey: 'david',
     color: '#6B9FD4',
   },
   anger: {
+    id: 'jeremiah',
     emotionId: 'anger',
     name: '예레미야',
+    subtitle: '눈물의 선지자',
     era: '예레미야서',
     emoji: '⚡',
+    introLine: '나는 하나님께 소리쳤다, 왜 나를 이 길로?',
     line1: '나도 하나님께 화를 냈다.',
     line2: '"왜 나를 이 길로 부르셨나요?"',
+    relatedVerse: '내가 이 말씀을 선포하기 싫어 입을 다물고 싶었다 — 예레미야 20:9',
+    relatedStory: '예레미야는 하나님의 말씀을 전하다 미움받고 핍박받았으나 끝까지 순종했다.',
+    imageKey: 'jeremiah',
     color: '#E07B54',
   },
   guilt: {
+    id: 'peter',
     emotionId: 'guilt',
     name: '베드로',
+    subtitle: '세 번 부인한 반석',
     era: '복음서',
     emoji: '🌊',
+    introLine: '나는 가장 중요한 순간에 넘어졌다.',
     line1: '나도 넘어졌다.',
     line2: '가장 소중한 순간에, 세 번이나.',
+    relatedVerse: '주께서 돌이켜 베드로를 보시니 그가 밖에 나가 심히 통곡하니라 — 누가복음 22:61-62',
+    relatedStory: '베드로는 예수님을 세 번 부인했지만 용서받고 교회의 반석이 되었다.',
+    imageKey: 'peter',
     color: '#7EB8A4',
   },
   shame: {
+    id: 'mary_magdalene',
     emotionId: 'shame',
     name: '막달라 마리아',
+    subtitle: '최초의 부활 증인',
     era: '복음서',
     emoji: '🌹',
+    introLine: '나는 모두가 손가락질했던 그 자리에 있었다.',
     line1: '나도 정죄받았다.',
     line2: '그러나 그것이 나의 끝은 아니었다.',
+    relatedVerse: '가서 내 형제들에게 이르라 — 요한복음 20:17',
+    relatedStory: '막달라 마리아는 일곱 귀신 들렸다 치유받은 후 부활의 첫 증인이 되었다.',
+    imageKey: 'mary_magdalene',
     color: '#C9A0DC',
   },
   exhaustion: {
+    id: 'elijah',
     emotionId: 'exhaustion',
     name: '엘리야',
+    subtitle: '로뎀나무 아래 쓰러진 선지자',
     era: '열왕기상',
     emoji: '🌵',
+    introLine: '나는 광야 로뎀나무 아래 누워 죽기를 청했다.',
     line1: '나도 지쳐서 쓰러졌다.',
     line2: '"이제 그만하겠다"고 했다.',
+    relatedVerse: '일어나 먹으라 네 갈 길이 멀다 — 열왕기상 19:7',
+    relatedStory: '엘리야는 바알 선지자들과 싸운 후 완전히 지쳐 도망쳤지만 하나님이 먹이고 일으키셨다.',
+    imageKey: 'elijah',
     color: '#C9A84C',
   },
   confusion: {
+    id: 'thomas',
     emotionId: 'confusion',
     name: '도마',
+    subtitle: '의심을 통해 믿음에 이른 자',
     era: '복음서',
     emoji: '❓',
+    introLine: '나는 보지 않으면 믿지 않겠다고 했다.',
     line1: '나도 의심했다.',
     line2: '보지 않으면 믿지 않겠다고 했다.',
+    relatedVerse: '보지 못하고 믿는 자들은 복되도다 — 요한복음 20:29',
+    relatedStory: '도마는 부활을 의심했지만 예수님이 직접 나타나셔서 의심이 믿음이 되었다.',
+    imageKey: 'thomas',
     color: '#8FA8C8',
   },
   gratitude: {
+    id: 'mary_magdalene_resurrection',
     emotionId: 'gratitude',
     name: '막달라 마리아',
+    subtitle: '기쁨의 눈물로 달려간 자',
     era: '부활',
     emoji: '🌅',
+    introLine: '나는 빈 무덤 앞에서 울다가 주님을 보았다.',
     line1: '나도 이 감사를 알았다.',
     line2: '눈물인지 기쁨인지 몰랐다.',
+    relatedVerse: '마리아야 — 요한복음 20:16',
+    relatedStory: '막달라 마리아는 부활하신 예수님을 가장 먼저 만난 후 제자들에게 달려가 전했다.',
+    imageKey: 'mary_magdalene_resurrection',
     color: '#F4A261',
   },
   peace: {
+    id: 'john',
     emotionId: 'peace',
     name: '요한',
+    subtitle: '예수님 가장 곁에 있었던 자',
     era: '복음서',
     emoji: '🕊️',
+    introLine: '나는 그분 곁에서 아무 말 없이 앉아 있었다.',
     line1: '나도 이 평안을 경험했다.',
     line2: '예수님 곁에서, 아무 말 없이.',
+    relatedVerse: '예수께서 사랑하시는 그 제자 — 요한복음 20:2',
+    relatedStory: '요한은 "예수님이 사랑하시던 제자"로 알려진, 가장 가까이 있었던 제자다.',
+    imageKey: 'john',
     color: '#90C9A0',
   },
 };
+
+// ─── Additional Companions (확장 준비 — 아직 라우팅 미연결) ──────────────────────
+
+export const ADDITIONAL_COMPANIONS: Record<string, Companion> = {
+  joseph: {
+    id: 'joseph',
+    emotionId: 'loneliness',
+    name: '요셉',
+    subtitle: '배신과 구덩이를 통과한 총리',
+    era: '창세기',
+    emoji: '🌾',
+    introLine: '형제들이 나를 팔던 날, 나는 혼자였다.',
+    line1: '나도 배신당했다.',
+    line2: '그 배신이 결국 구원이 되었다.',
+    relatedVerse: '당신들이 나를 이리로 팔았다고 근심하지 마소서 — 창세기 45:5',
+    relatedStory: '요셉은 형제들에게 팔려 노예가 되고 감옥에 갔지만 애굽의 총리가 되어 가족을 구했다.',
+    imageKey: 'joseph',
+    color: '#F0B429',
+  },
+  ruth: {
+    id: 'ruth',
+    emotionId: 'loneliness',
+    name: '룻',
+    subtitle: '낯선 땅에서 충성으로 살아낸 자',
+    era: '룻기',
+    emoji: '🌿',
+    introLine: '어머니가 어디로 가시면 나도 따라가겠습니다.',
+    line1: '나도 모든 것을 잃고 낯선 땅에 섰다.',
+    line2: '그래도 포기하지 않았다.',
+    relatedVerse: '당신이 가는 곳에 나도 가겠고 — 룻기 1:16',
+    relatedStory: '룻은 남편을 잃고 이방인으로 이스라엘에 왔지만 충성으로 보아스의 아내가 되어 다윗의 조상이 되었다.',
+    imageKey: 'ruth',
+    color: '#86B87E',
+  },
+  esther: {
+    id: 'esther',
+    emotionId: 'fear',
+    name: '에스더',
+    subtitle: '죽음을 무릅쓰고 나아간 왕비',
+    era: '에스더서',
+    emoji: '👑',
+    introLine: '내가 죽으면 죽으리이다.',
+    line1: '나도 두려웠다.',
+    line2: '하지만 이것이 내가 여기 있는 이유였다.',
+    relatedVerse: '이때를 위하여 왕후의 자리를 얻은 것이 아닌지 — 에스더 4:14',
+    relatedStory: '에스더는 유대인 학살 위기에서 목숨을 걸고 왕 앞에 나아가 민족을 구했다.',
+    imageKey: 'esther',
+    color: '#D4A0C0',
+  },
+  joshua: {
+    id: 'joshua',
+    emotionId: 'fear',
+    name: '여호수아',
+    subtitle: '두려움을 뚫고 가나안으로 간 자',
+    era: '여호수아서',
+    emoji: '⚔️',
+    introLine: '두려워하지 말라, 나는 그 명령을 마음에 새겼다.',
+    line1: '나도 새로운 시작이 두려웠다.',
+    line2: '하지만 하나님이 앞에 가셨다.',
+    relatedVerse: '강하고 담대하라 두려워하지 말라 — 여호수아 1:9',
+    relatedStory: '여호수아는 모세 후계자로서 두려움을 안고 이스라엘을 이끌어 가나안을 정복했다.',
+    imageKey: 'joshua',
+    color: '#C8A86A',
+  },
+  paul: {
+    id: 'paul',
+    emotionId: 'guilt',
+    name: '바울',
+    subtitle: '핍박자에서 복음의 사도로',
+    era: '사도행전',
+    emoji: '✉️',
+    introLine: '나는 교회를 핍박했던 자다.',
+    line1: '나도 용서받을 수 없다고 생각했다.',
+    line2: '그러나 그분이 나를 불러 사도로 삼으셨다.',
+    relatedVerse: '나는 그리스도 예수 안에서 용서받은 죄인 중의 괴수니라 — 디모데전서 1:15',
+    relatedStory: '바울은 그리스도인을 핍박하다 다마스쿠스 길에서 예수님을 만나 가장 열정적인 사도가 되었다.',
+    imageKey: 'paul',
+    color: '#8B9BB4',
+  },
+  zacchaeus: {
+    id: 'zacchaeus',
+    emotionId: 'shame',
+    name: '삭개오',
+    subtitle: '나무 위에서 내려온 세리장',
+    era: '복음서',
+    emoji: '🌳',
+    introLine: '나는 사람들이 싫어하는 세리장이었다.',
+    line1: '나도 모두에게 손가락질 받았다.',
+    line2: '그런데 그분이 내 이름을 불러주셨다.',
+    relatedVerse: '삭개오야 속히 내려오라 — 누가복음 19:5',
+    relatedStory: '삭개오는 작은 키로 뽕나무에 올라갔다가 예수님께 이름이 불려 내려오고 변화되었다.',
+    imageKey: 'zacchaeus',
+    color: '#7AAD7A',
+  },
+  job: {
+    id: 'job',
+    emotionId: 'exhaustion',
+    name: '욥',
+    subtitle: '모든 것을 잃고도 하나님을 찾은 자',
+    era: '욥기',
+    emoji: '🏔️',
+    introLine: '나는 하루아침에 모든 것을 잃었다.',
+    line1: '나도 이유를 몰라 무너졌다.',
+    line2: '"어디 있느냐"는 질문에 나는 침묵했다.',
+    relatedVerse: '내가 주를 귀로만 들었사오나 이제는 눈으로 뵈옵나이다 — 욥기 42:5',
+    relatedStory: '욥은 모든 것을 잃었지만 끝까지 하나님을 찾았고 결국 하나님이 나타나셨다.',
+    imageKey: 'job',
+    color: '#A0887A',
+  },
+  abraham: {
+    id: 'abraham',
+    emotionId: 'confusion',
+    name: '아브라함',
+    subtitle: '알지 못하는 땅으로 떠난 믿음의 조상',
+    era: '창세기',
+    emoji: '⭐',
+    introLine: '나는 어디로 가는지 모르고 떠났다.',
+    line1: '나도 방향을 몰랐다.',
+    line2: '그래도 한 발 내디뎠다.',
+    relatedVerse: '갈 바를 알지 못하고 나아갔으며 — 히브리서 11:8',
+    relatedStory: '아브라함은 하나님의 말씀만 붙잡고 고향을 떠나 믿음의 조상이 되었다.',
+    imageKey: 'abraham',
+    color: '#D4B860',
+  },
+  nehemiah: {
+    id: 'nehemiah',
+    emotionId: 'confusion',
+    name: '느헤미야',
+    subtitle: '무너진 성벽을 다시 세운 자',
+    era: '느헤미야서',
+    emoji: '🧱',
+    introLine: '예루살렘 성벽이 무너졌다는 소식에 나는 울었다.',
+    line1: '나도 무너진 것 앞에 섰다.',
+    line2: '하지만 기도하고 일어섰다.',
+    relatedVerse: '하늘의 하나님이 우리를 형통하게 하시리라 — 느헤미야 2:20',
+    relatedStory: '느헤미야는 포로 중에 예루살렘 성벽 붕괴 소식을 듣고 기도한 후 왕의 허락을 받아 재건했다.',
+    imageKey: 'nehemiah',
+    color: '#8BA0B8',
+  },
+  prodigal: {
+    id: 'prodigal',
+    emotionId: 'guilt',
+    name: '돌아온 아들',
+    subtitle: '먼 나라에서 돌아온 탕자',
+    era: '비유',
+    emoji: '🏠',
+    introLine: '나는 아버지 집을 떠나 모든 것을 탕진했다.',
+    line1: '나도 스스로를 아들이라 부를 자격이 없다고 생각했다.',
+    line2: '그런데 아버지가 달려와 나를 안았다.',
+    relatedVerse: '아직도 거리가 멀 때에 아버지가 그를 보고 달려가 — 누가복음 15:20',
+    relatedStory: '탕자는 유산을 낭비하고 돌아왔지만 아버지는 그를 보자마자 달려가 잔치를 열었다.',
+    imageKey: 'prodigal',
+    color: '#B89060',
+  },
+};
+
+// ─── Helper Functions ──────────────────────────────────────────────────────────
 
 export function getCompanion(emotionId: string): Companion | null {
   return COMPANIONS[emotionId] || null;
 }
 
+export function getAllCompanions(): Companion[] {
+  return [
+    ...Object.values(COMPANIONS),
+    ...Object.values(ADDITIONAL_COMPANIONS),
+  ];
+}
+
+export function getCompanionById(id: string): Companion | null {
+  return (
+    Object.values(COMPANIONS).find((c) => c.id === id) ||
+    Object.values(ADDITIONAL_COMPANIONS).find((c) => c.id === id) ||
+    null
+  );
+}

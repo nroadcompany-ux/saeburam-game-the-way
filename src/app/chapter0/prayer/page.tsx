@@ -3,10 +3,12 @@
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
+interface EmotionData { id: string; name: string; emoji: string; intensity: 1 | 2 | 3; }
+
 export default function PrayerPage() {
   const router = useRouter();
   const [prayer, setPrayer] = useState('');
-  const [emotion, setEmotion] = useState<any>(null);
+  const [emotion, setEmotion] = useState<EmotionData | null>(null);
 
   useEffect(() => {
     const saved = sessionStorage.getItem('chapter0_emotion');

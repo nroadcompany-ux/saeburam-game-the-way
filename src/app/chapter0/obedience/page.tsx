@@ -4,10 +4,12 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { getObedienceOptions, type Obedience } from '@/data/obedience-engine';
 
+interface EmotionData { id: string; name: string; emoji: string; intensity: 1 | 2 | 3; }
+
 export default function ObediencePage() {
   const router = useRouter();
   const [obedience, setObedience] = useState<Obedience | null>(null);
-  const [emotion, setEmotion] = useState<any>(null);
+  const [emotion, setEmotion] = useState<EmotionData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [selected, setSelected] = useState(false);
 
@@ -77,7 +79,7 @@ export default function ObediencePage() {
           <div className="text-4xl mb-4">✅</div>
           <h1 className="text-2xl font-bold text-gold mb-4">순종이 결정되었습니다</h1>
           <p className="text-cream mb-8">
-            "{obedience.action}"
+            {'"'}{obedience.action}{'"'}
             <br />
             <br />
             당신의 삶이 변한다.

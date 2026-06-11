@@ -6,10 +6,17 @@ import { getCompanion, type Companion } from '@/data/companion-engine';
 
 type Phase = 'appear' | 'line1' | 'line2' | 'done';
 
+interface EmotionData {
+  id: string;
+  name: string;
+  emoji: string;
+  intensity: 1 | 2 | 3;
+}
+
 export default function CompanionPage() {
   const router = useRouter();
   const [companion, setCompanion] = useState<Companion | null>(null);
-  const [emotion, setEmotion] = useState<any>(null);
+  const [emotion, setEmotion] = useState<EmotionData | null>(null);
   const [phase, setPhase] = useState<Phase>('appear');
   const [show, setShow] = useState(false);
 
@@ -18,7 +25,15 @@ export default function CompanionPage() {
     if (!saved) { router.push('/chapter0/emotion'); return; }
     const parsed = JSON.parse(saved);
     setEmotion(parsed);
-    setCompanion(getCompanion(parsed.id));
+    const c = getCompanion(parsed.id);
+    setCompanion(c);
+    // Save companion for legacy
+    if (c) {
+      sessionStorage.setItem(
+        'chapter0_companion',
+        JSON.stringify({ name: c.name, emoji: c.emoji, color: c.color })
+      );
+    }
     setTimeout(() => setShow(true), 80);
   }, [router]);
 
@@ -63,6 +78,11 @@ export default function CompanionPage() {
           <p className="text-5xl font-bold" style={{ color: companion.color }}>
             {companion.name}
           </p>
+          {companion.subtitle && (
+            <p className="text-sm mt-3 opacity-50" style={{ color: companion.color }}>
+              {companion.subtitle}
+            </p>
+          )}
           <p className="text-sub-text text-sm mt-12 animate-pulse">터치하여 계속</p>
         </div>
       )}
@@ -77,7 +97,7 @@ export default function CompanionPage() {
             {companion.emoji} {companion.name}
           </p>
           <p className="text-cream text-3xl font-bold leading-snug">
-            "{companion.line1}"
+            {'"'}{companion.line1}{'"'}
           </p>
           <p className="text-sub-text text-sm mt-12 animate-pulse">터치하여 계속</p>
         </div>
@@ -93,7 +113,7 @@ export default function CompanionPage() {
             {companion.emoji} {companion.name}
           </p>
           <p className="text-cream text-2xl font-bold leading-snug mb-3">
-            "{companion.line1}"
+            {'"'}{companion.line1}{'"'}
           </p>
           <p
             className="text-xl leading-snug transition-all duration-700"
@@ -103,7 +123,7 @@ export default function CompanionPage() {
               fontWeight: phase === 'done' ? 700 : 400,
             }}
           >
-            "{companion.line2}"
+            {'"'}{companion.line2}{'"'}
           </p>
 
           {phase === 'line2' && (

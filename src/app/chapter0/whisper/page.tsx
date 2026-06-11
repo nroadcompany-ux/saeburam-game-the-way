@@ -4,10 +4,12 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { selectHardcodedWhisper, type Whisper } from '@/data/whispers-hardcoded';
 
+interface EmotionData { id: string; name: string; emoji: string; intensity: 1 | 2 | 3; }
+
 export default function WhisperPage() {
   const router = useRouter();
   const [whisper, setWhisper] = useState<Whisper | null>(null);
-  const [emotion, setEmotion] = useState<any>(null);
+  const [emotion, setEmotion] = useState<EmotionData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
