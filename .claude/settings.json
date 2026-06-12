@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "printf '{\"hookSpecificOutput\":{\"hookEventName\":\"UserPromptSubmit\",\"additionalContext\":\"[현재 시각 — 보고 타임스탬프용] %s KST\"}}' \"$(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M:%S')\"",
+            "statusMessage": "현재 시각(KST) 주입 중..."
+          }
+        ]
+      }
+    ]
+  }
+}
