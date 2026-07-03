@@ -1,516 +1,329 @@
 # THE WAY — CONSTITUTION
+## 영혼의 여정을 위한 헌법
 
-**Authority:** Game Design First Principles  
-**Purpose:** Governance of all creative decisions  
-**Binding:** Non-negotiable  
-
----
-
-## ARTICLE 1: GAME-FIRST PRINCIPLE
-
-### Section 1.1: Gameplay Justifies Theology
-
-**Law:** Every game mechanic must pass the "Real Game" test.
-
-**Test:** "Would this feature exist if this wasn't a Bible game?"
-
-If the answer is NO, remove it.
-
-**Examples of PASS:**
-- Faith meter: Affects dialogue, ending, NPC trust (real game mechanic)
-- Choice consequence: Different outcomes based on emotional state (gameplay depth)
-- Relationship system: NPC behavior changes based on your past choices (emergent gameplay)
-
-**Examples of FAIL:**
-- Mandatory prayer sequences (feels like chore, not gameplay)
-- Sermon dialogues (exposition, not choice)
-- Gospel recitation puzzles (quiz, not game)
-
-### Section 1.2: Message Follows Gameplay
-
-**Principle:** Meaning emerges from play, not from declaration.
-
-**Not allowed:**
-- "This choice teaches you about repentance..." (explicit message)
-- Narrator explaining spiritual truths (sermon)
-- Tutorial text defining faith mechanics (didactic)
-
-**Encouraged:**
-- Player experiences consequence of choice (discovery)
-- Relationship with David changes (implicit meaning)
-- Ending shifts based on accumulated choices (emergent narrative)
+**버전:** v1.0 FINAL  
+**작성일:** 2026년 6월 9일  
+**작성자:** Claude (성재님 지침 기반)  
+**상태:** 확정
 
 ---
 
-## ARTICLE 2: PLAYER AGENCY
+# PART 1. PURPOSE — 목적
 
-### Section 2.1: No Correct Answer
+## 1.1 존재 이유
 
-**Law:** Choices must feel genuinely ambiguous.
+THE WAY는 게임이 아니다.  
+THE WAY는 **영혼의 여정 플랫폼**이다.
 
-**Binary morality is forbidden:**
-- Not "good choice" vs "bad choice"
-- Not "right path" vs "wrong path"
-- Not "blessed" vs "cursed"
+우리는 게임의 언어와 형식을 빌려,  
+한 사람이 하나님을 만나고,  
+자신을 발견하고,  
+삶을 바꾸도록 돕는다.
 
-**Reality-based morality required:**
-- This choice has THIS consequence
-- That choice has THAT consequence
-- Both are defensible under different worldviews
-- Both shape who you become
+## 1.2 최종 목적
 
-**Example: The Cave Choice**
+> **플레이어가 예수 그리스도를 만나 회심하고,**  
+> **평생 하나님을 알아가며,**  
+> **겸손과 순종 가운데 성령과 동행하며,**  
+> **하나님의 기쁨이 되는 삶을 살도록 돕는 것이다.**
 
-"Do we kill Saul?"
+지식의 전달이 아니다.  
+경험의 제공이 아니다.  
+목적지에 도착하는 것이 아니다.  
+오직 **평생의 만남과 동행**이다.
 
-- **Kill him:** "We end the threat. Strategic victory. But we become what we fled."
-- **Spare him:** "We preserve honor. Show God's mercy. But he hunts us forever."
-- **Alert David:** "We defer to leadership. Show loyalty. But lose agency."
-- **Escape:** "We survive. Practical. But face the problem again."
+THE WAY는 목적지에 도착하는 게임이 아니다.  
+**하나님을 평생 알아가는 여정이다.**
 
-No answer is wrong. All are defensible. All have weight.
+## 1.3 수단과 목적
 
-### Section 2.2: Consequences Are Real
-
-**Law:** Every choice must have mechanical consequences.
-
-**Not allowed:**
-- Choices that "don't matter"
-- Hidden "correct" paths that lead to same ending
-- Illusory agency (player thinks choice matters, but it doesn't)
-
-**Required:**
-- Each choice shifts faith score
-- Each choice alters NPC relationships
-- Each choice unlocks/locks future dialogue
-- Each choice affects story branching
-- Each choice visible in final outcome
-
-**System:** The AWAKENING ENGINE tracks all consequences.
+| 수단 | 목적 |
+|------|------|
+| 게임 | 영혼의 여정 |
+| 퀘스트 | 순종의 훈련 |
+| Wisdom Point | 깨달음의 흔적 |
+| Legacy | 영적 자서전 |
+| 질문 | 하나님과의 대화 |
+| 스토리 | 내 이야기의 거울 |
 
 ---
 
-## ARTICLE 3: EMOTIONAL HONESTY
+# PART 2. IDENTITY — 정체성
 
-### Section 3.1: No Cheap Comfort
+## 2.1 우리는 무엇인가
 
-**Forbidden Truth:** Christianity is hard.
+THE WAY는:
 
-**Forbidden to say:**
-- "Just believe and your problems disappear"
-- "God's plan is always comfortable"
-- "Faith makes everything okay"
-- "Prayer solves all suffering"
+- **성경 RPG가 아니다** — 지식을 쌓는 곳이 아니다
+- **영혼의 여정 플랫폼이다** — 변화가 일어나는 공간이다
+- **관객석이 아니다** — 플레이어는 역사 속 참여자다
+- **종교 앱이 아니다** — 살아있는 신앙의 현장이다
+- **목적지가 있는 게임이 아니다** — 평생 알아가는 여정이다
 
-**Required:**
-- Show real struggle
-- Show unanswered prayers
-- Show faithful people suffering
-- Show the cost of discipleship
+## 2.2 플레이어의 정체성
 
-**Example:** Choosing mercy (spare Saul) doesn't guarantee safety. Saul could return. The choice was right, but the suffering continues.
+플레이어는 **관객이 아니라 참여자**다.
 
-### Section 3.2: Tears Are Valid
+그들은 성경 이야기를 읽는 것이 아니라,  
+그 이야기 안에서 질문받는다.  
+그들은 역사 속의 한 인물처럼 서서,  
+오늘 자신의 삶에서 같은 질문을 마주한다.
 
-**Law:** Sadness is not failure of faith.
+> "당신이라면 어떻게 했겠습니까?"  
+> 가 아니라  
+> **"당신은 지금 어떻게 하고 있습니까?"**
 
-The game can end with:
-- Tears shed for the cost of obedience
-- Grief over what was lost
-- Loneliness of the solitary path
-- Fear of the unknown future
+## 2.3 THE WAY가 아닌 것
 
-This is not "bad ending."
-
-This is **honest ending.**
-
-### Section 3.3: Doubt is Exploration, Not Rejection
-
-**Law:** Characters can doubt AND be faithful.
-
-**Allowed:**
-- "I don't understand this, but I'll obey"
-- "I'm angry at God, but I won't leave"
-- "This doesn't make sense, but I trust"
-- "I'm afraid, but I'll follow"
-
-**Not allowed:**
-- Doubt = weakness
-- Questions = lack of faith
-- Confusion = spiritual failure
+| ❌ 아닌 것 | ✅ 맞는 것 |
+|-----------|-----------|
+| 성경 퀴즈 앱 | 하나님과의 대화 공간 |
+| 신앙 게이미피케이션 | 순종의 실천 플랫폼 |
+| 교회 교육 도구 | 개인적 회심의 여정 |
+| 지식 축적 시스템 | 변화 기록 시스템 |
+| 보상 기반 게임 | 은혜 기반 성장 |
+| 클리어가 있는 게임 | 끝나지 않는 여정 |
 
 ---
 
-## ARTICLE 4: THEOLOGICAL INTEGRITY
+# PART 3. IMMUTABLE LAWS — 불변 법칙
 
-### Section 4.1: Scripture Is Authoritative
+이 법칙들은 어떤 상황에서도 깨질 수 없다.  
+기능이 바뀌어도, 디자인이 바뀌어도,  
+이 14가지는 THE WAY의 뼈대다.
 
-**Law:** Bible quotes must be accurate.
+## 법칙 01 (LAW 01) — 여정 우선
+THE WAY는 성경 RPG가 아니라 영혼의 여정 플랫폼이다.
 
-**Standard:** ESV or Korean version accuracy.
+## 법칙 02 (LAW 02) — 수단과 목적
+게임은 수단이다. 회심과 변화가 목적이다.
 
-**Process:**
-1. If you quote Scripture, verify it
-2. If context is needed, provide it
-3. If it contradicts gameplay, design around it (not against it)
-4. Never distort Scripture to fit gameplay
+## 법칙 03 (LAW 03) — 만남 우선
+성경 지식 전달보다 하나님과의 만남이 우선이다.
 
-### Section 4.2: God Is Not a Tool
+## 법칙 04 (LAW 04) — 여정 구조
+모든 챕터는 반드시 이 구조를 따른다:
+> **질문 → 깨달음 → 회개 → 순종 → 변화 → 기록**
 
-**Forbidden:**
-- "Pray to unlock this door" (game mechanic masquerading as prayer)
-- "Have faith to pass this obstacle" (faith as power-up)
-- "Sacrifice to get reward" (transactional theology)
+## 법칙 05 (LAW 05) — Wisdom의 본질
+Wisdom Point는 경험치가 아니다.  
+**깨달음을 삶에 적용한 흔적**이다.
 
-**Encouraged:**
-- Prayer as reflection moment (no game effect, but emotional anchor)
-- Faith as character trajectory (shows in choices, not as stat buffer)
-- Sacrifice as real cost (permanent loss, spiritual gain)
+## 법칙 06 (LAW 06) — Legacy의 본질
+Legacy는 플레이어의 영적 자서전이다.  
+**모든 기록은 언젠가 간증이 된다.**
 
-### Section 4.3: Judgment Is Real
+## 법칙 07 (LAW 07) — 현실 순종 최고 가치
+현실 순종이 게임 내 성취보다 높은 가치를 가진다.
 
-**Law:** Choices have eternal weight.
+## 법칙 08 (LAW 08) — 참여자 정체성
+플레이어는 관객이 아니라  
+**역사 속에서 질문받는 참여자**이다.
 
-Not just gameplay points. Not just story branches.
+## 법칙 09 (LAW 09) — 수렴의 법칙
+모든 시스템은 결국  
+**하나님 사랑, 이웃 사랑**으로 수렴해야 한다.
 
-Player must feel: **"This choice will be judged. And I will answer for it."**
+## 법칙 10 (LAW 10) — 최종 목적
+THE WAY의 최종 목적은  
+플레이어가 예수 그리스도를 만나 회심하고,  
+평생 하나님을 알아가며,  
+겸손과 순종 가운데 성령과 동행하며,  
+**하나님의 기쁨이 되는 삶을 살도록 돕는 것**이다.
 
-The game should create moments where player feels watched by God.
+THE WAY는 목적지에 도착하는 게임이 아니다.  
+**하나님을 평생 알아가는 여정이다.**
 
-Not oppressive. Not paranoid.
+## 법칙 11 (LAW 11) — 성경 우선 법칙
+THE WAY는 성경의 무오성과 최종 권위를 인정한다.
 
-Simply: **Accountability.**
+모든 질문,  
+모든 체험,  
+모든 깨달음,  
+모든 시스템은
 
----
+성경 위에 설 수 없으며  
+**성경에 의해 검증된다.**
 
-## ARTICLE 5: NARRATIVE INTEGRITY
+## 법칙 12 (LAW 12) — 성령 동행 법칙
+THE WAY는
 
-### Section 5.1: Show, Never Tell
+예수 그리스도의 죽음과 부활을 믿으며,
 
-**Forbidden phrases:**
-- "This taught you about..."
-- "You learned that..."
-- "This proves that..."
-- "Now you understand..."
+성령께서 오늘도 신자를  
+인도하시고 역사하심을 인정한다.
 
-**Required:** Let player discover.
+그러나 체험을 신앙의 기준으로 삼지 않으며,
 
-**Example:**
-- Not: "You learned that mercy is strength"
-- But: David spares Saul. Saul leaves. Consequence unfolds. Player concludes.
+반대로 성령의 역사와 은사를  
+무조건 부정하지도 않는다.
 
-### Section 5.2: Characters Are Complex
+**모든 체험은 성경 안에서 분별한다.**
 
-**Law:** No character is purely good or evil.
+## 법칙 13 (LAW 13) — 겸손한 분별 법칙
+체험만 믿는 것도 교만이다.
 
-**Saul (the "enemy"):**
-- Justifiable paranoia (David IS a political threat)
-- Lost his kingship (real trauma)
-- Separated from his son (genuine pain)
-- Fighting for survival of dynasty (understandable)
+내 해석만 믿는 것도 교만이다.
 
-Still an antagonist. Still must be resisted. But **human.**
+THE WAY의 플레이어는
 
-**David (the "hero"):**
-- Makes mistakes
-- Shows weakness
-- Questions God
-- Doesn't have all answers
+말씀과 성령 앞에서  
+**항상 배우는 자의 자세를 유지한다.**
 
-Still a leader. Still worth following. But **flawed.**
+## 법칙 14 (LAW 14) — 고난과 방해 법칙
+하나님을 따르는 길에는  
+반드시 고난과 방해가 존재한다.
 
-### Section 5.3: Branching Is Meaningful
+THE WAY는  
+쉬운 성공을 약속하지 않는다.
 
-**Law:** Every branch must feel distinct.
+순종은 때때로 손해처럼 보이며,
 
-Not: "Same ending, different dialogue"
-
-But: **Same theme, different conclusions**
-
-Example: "Mercy" path
-
-- Path A: David teaches you mercy (you're student)
-- Path B: You teach David mercy (you're teacher)
-- Path C: You and David discover mercy together (peer partnership)
-
-Same theme (mercy). Different relationships. Different character growth.
-
----
-
-## ARTICLE 6: AESTHETIC BOUNDARIES
-
-### Section 6.1: AAA Quality Standard
-
-**Minimum standard:** 2026 flagship mobile RPG
-
-**References:**
-- Genshin Impact (visual polish)
-- Witcher 3 (cinematic direction)
-- Life is Strange (narrative design)
-- Detroit: Become Human (UI/UX)
-
-**Forbidden:**
-- 2015-era mobile game graphics
-- Church website aesthetics
-- Sunday school poster design
-- Clipart-style visuals
-
-### Section 6.2: Dark Gold Theology
-
-Visual language must match spiritual language.
-
-**Color palette:** Dark navy + deep gold + cream
-
-**Meaning:**
-- Navy: Mystery, depth, God's otherness
-- Gold: Divine presence, redemption, value
-- Cream: Warmth, humanity, grace
-
-**Forbidden:** Bright colors suggesting "happiness gospel"
-
-### Section 6.3: Cinematic Honesty
-
-Every scene must feel true.
-
-**Not:** Pretty for its own sake
-
-**Yes:** Beautiful because it's true
-
-Example: The cave choice scene
-
-- Darkness should feel oppressive (moral weight)
-- Light should feel ambiguous (not clear path)
-- Faces should show struggle (not serenity)
-- Music should challenge (not comfort)
+고난 속에서도  
+하나님을 신뢰하는 것이  
+**성장의 일부임을 인정한다.**
 
 ---
 
-## ARTICLE 7: VOICE & TONE
+# PART 4. CORE ENGINES — 핵심 엔진
 
-### Section 7.1: No Preaching
+THE WAY를 움직이는 8개의 핵심 엔진.  
+각 엔진은 독립적으로 작동하지만,  
+함께 **하나의 여정**을 만든다.
 
-**Forbidden language patterns:**
-- Archaic "thee/thou" (fake biblicism)
-- Repetitive sermon structure
-- Motivational poster platitudes
-- Greeting card spirituality
+## ENGINE 01 — Divine Question Engine
+모든 콘텐츠의 출발점. 하나님이 먼저 질문하신다. 질문은 정답을 요구하지 않고, 정직한 반응을 요구한다. 질문은 반드시 ?로 끝나고, 설교하지 않으며, 발견하게 만든다.
 
-**Required:**
-- Natural dialogue (people don't talk like preachers)
-- Struggle visible (not overcome instantly)
-- Questions more than answers
-- Doubt acknowledged alongside belief
+## ENGINE 02 — Wisdom Engine
+깨달음이 삶에 착지하는 과정을 추적한다. 말씀을 읽는 것 → 이해하기 → 질문받기 → 정직히 반응하기 → 현실에 적용하기의 과정에서 Wisdom Point가 획득된다. 지식량이 아니라 삶의 변화량을 측정한다.
 
-### Section 7.2: Respect Player Intelligence
+## ENGINE 03 — Awakening Engine
+플레이어가 자신의 현실과 성경의 이야기가 연결되는 순간을 만든다. "이 이야기는 나의 이야기다"라는 인식이 깨어남이고, 이는 감동이 아니라 인식의 전환이다.
 
-**Not allowed:**
-- Over-explaining plot
-- Repeating key themes
-- Spelling out spiritual lessons
-- Treating player like child
+## ENGINE 04 — Relationship Engine
+플레이어와 하나님 사이의 관계가 쌓이고 깊어지는 과정을 추적한다. 낯선 자 → 여행자 → 동행자 → 친구 → 종 → 아들/딸의 6단계를 거친다. 관계는 퀘스트 클리어로 오르지 않고, 정직한 반응이 관계를 깊게 한다.
 
-**Required:**
-- Trust player to understand complexity
-- Allow player to miss things
-- Let player reach conclusions
-- Respect player's spiritual maturity
+## ENGINE 05 — Repentance Engine
+플레이어가 자신의 죄와 실패를 마주하고 하나님께 돌아오는 과정을 지원한다. 인식 → 마주함 → 고백 → 전환 → 기록의 흐름을 따른다. 회개는 처벌이 아니라 복귀이고, Legacy에 기록된 회개는 간증이 된다.
 
----
+## ENGINE 06 — Obedience Engine
+플레이어의 현실 순종이 게임 시스템과 연결된다. 현실 퀘스트는 오늘 실행 가능한 구체적 행동이고, 게임 내 성취는 현실 순종을 대체하지 못한다. 현실에서 일어난 일이 Legacy의 진짜 내용이 된다.
 
-## ARTICLE 8: SYSTEMS INTEGRITY
+## ENGINE 07 — Legacy Engine
+플레이어의 영적 여정 전체를 기록하고, 그것을 영적 자서전으로 만든다. 만남, 질문, 순종, 실패, 변화의 5가지 기록으로 구성되고, Legacy는 성공의 기록이 아니라 여정의 기록이다. 모든 기록은 언젠가 간증이 된다.
 
-### Section 8.1: Faith Meter Reflects Trajectory
-
-**Law:** Faith score must track actual choices made.
-
-**Not:**
-- Random increases/decreases
-- Arbitrary milestones
-- Inconsistent scaling
-
-**Yes:**
-- Mercy +8 (actual grace cost)
-- Violence -12 (actual rejection of God's way)
-- Sacrifice +5 (actual death to self)
-- Betrayal -20 (actual rebellion)
-
-### Section 8.2: Relationships Have Weight
-
-**Law:** NPC trust must affect narrative access.
-
-**Examples:**
-- Low David trust: He doesn't confide in you
-- High Abishai respect: He might show vulnerability
-- Low Jonadab trust: He doesn't discuss doubts with you
-
-**Not:** Surface changes. **Mechanical changes.**
-
-### Section 8.3: Emotion System Isn't Manipulation
-
-**Law:** Emotions affect choices, not override them.
-
-**Allowed:**
-- Player can feel Fear but still choose Courage
-- Player can feel Greed but still choose Sacrifice
-- Emotion creates bias, not destiny
-
-**Not allowed:**
-- "You're too angry to think clearly" (removes player choice)
-- Rage-mode gameplay (emotion overrides agency)
-- "Love makes you sacrifice your friend" (sentiment justifies bad choice)
+## ENGINE 08 — Discernment Engine
+모든 생각, 감정, 체험이 하나님께 온 것인지 말씀과 성령 안에서 분별하는 과정을 지원한다. 말씀과의 일치, 교만 vs 겸손, 하나님 사랑으로의 수렴 등 3가지 질문으로 분별한다. 체험만 믿는 것도 교만이고, 내 해석만 믿는 것도 교만이다.
 
 ---
 
-## ARTICLE 9: QUALITY GATES
+# PART 5. TRANSFORMATION FORMULA — 성장 공식
 
-### Section 9.1: Before Shipping
+THE WAY의 성장은 나선형이다. 직선이 아니고 끝도 없다. 같은 질문이 다른 삶의 단계에서 다시 온다. 그때마다 더 깊이 들어간다. THE WAY는 100개의 챕터를 클리어하는 게임이 아니라, 같은 질문이 평생 다른 깊이로 돌아오는 여정이다.
 
-Every element must pass:
+질문 → 깨달음 → 회개 → 순종 → 변화 → 기록 → 다음 질문
 
-**Truth Test:** Is this true to the Bible?
-**Game Test:** Is this good gameplay?
-**Beauty Test:** Is this visually/narratively excellent?
-**Heart Test:** Does this respect the player's soul?
-
-If any test fails: **Revise or cut.**
-
-### Section 9.2: Playtesting Standard
-
-**Requirement:** Players must not be able to play through without emotional response.
-
-Not: "Was it fun?"
-
-**Yes:** "Did you feel something? Did something change in you?"
-
-If playtester finishes unmoved, **something is broken.**
+변화의 3가지 수준: 인식의 변화(보는 것이 달라짐), 행동의 변화(하는 것이 달라짐), 존재의 변화(나 자신이 달라짐).
 
 ---
 
-## ARTICLE 10: SPIRITUAL SAFETY
+# PART 6. WISDOM — 정의
 
-### Section 10.1: This Game Can Hurt
+Wisdom Point는 **경험치(EXP)가 아니다.**
 
-**Acknowledgment:** Confronting God's reality can be painful.
+Wisdom은: **하나님의 질문을 받고, 깨달음을 얻고, 삶에 적용한 흔적의 총합이다.**
 
-**Protection:**
-- Resources available (Codex with biblical context)
-- Pacing allows reflection
-- No forced spiritual experience
-- Player controls pace (can pause, step away)
+Wisdom은 다음에서 온다:
+1. 말씀 속에서 자신을 발견하는 순간 (+10~25점)
+2. 하나님의 질문 앞에서 정직한 반응 (+25~35점)
+3. 현실 퀘스트 실행 (+35~50점)
+4. Legacy에 기록 (+5~15점 추가)
+5. 반복 순종 (보너스)
 
-**Not allowed:**
-- Psychological manipulation
-- Cult-like pressure tactics
-- Guilt as game mechanic
-- Shame spirals
+Wisdom이 아닌 것: 챕터 클리어, 정답 선택, 플레이 시간, 반복 플레이.
 
-### Section 10.2: Grace is Always Available
-
-**Law:** No ending is "beyond redemption."
-
-Even the "worst" paths (Betrayer) end with the door open.
-
-**Message:** God's grace is bigger than your failure.
-
-**Not:** Deterministic fate
-
-**Yes:** Genuine possibility of repentance
+Wisdom이 쌓인다는 것은: 더 많은 지식이 생겼다는 뜻이 아니라, 더 많은 삶의 영역에서 하나님을 만났다는 뜻이고, 더 많은 순간에 순종을 선택했다는 뜻이고, 하나님을 더 깊이 알아가고 있다는 뜻이다.
 
 ---
 
-## ARTICLE 11: RESPECT FOR PLAYER JOURNEY
+# PART 7. LEGACY — 정의
 
-### Section 11.1: Different People, Different Paths
+Legacy는 **플레이어의 영적 자서전**이다.
 
-**Recognition:** Players will interpret faith differently.
+> 모든 기록은 언젠가 간증이 된다.
 
-**Not allowed:**
-- "This is the only true interpretation"
-- "This ending is the 'best' ending"
-- Judging player based on choices made
+Legacy는 성공의 기록이 아니라 여정의 기록이다. 만남, 질문, 순종, 실패, 변화의 5가지 요소로 구성된다.
 
-**Allowed:**
-- Different authentic paths
-- Different genuine encounters with God
-- Different costly obedience
-- Different true endings
-
-### Section 11.2: This Game Can Change Lives
-
-**Acknowledgment:** This is not just entertainment.
-
-**Responsibility:** Design as if souls depend on it.
-
-Because they might.
-
-**Standard:** Would I show this to someone at their spiritual crossroads?
-
-If no: **Fix it.**
+Legacy의 원칙:
+1. Legacy는 삭제되지 않는다 — 과거는 과거대로 남는다
+2. Legacy는 플레이어의 것이다 — 누가 평가하지 않는다
+3. 실패도 Legacy다 — 실패를 숨기지 않아도 된다
+4. Legacy는 선택적으로 공유된다 — 강요된 공개는 없다
+5. Legacy는 살아있다 — 언젠가 누군가의 여정에 빛이 된다
 
 ---
 
-## ARTICLE 12: GOVERNANCE
+# PART 8. REALITY QUEST PRINCIPLES — 현실 퀘스트 원칙
 
-### Section 12.1: When in Doubt
+현실 퀘스트는 **오늘 실행 가능한 구체적 순종의 초대**다.
 
-**Hierarchy of Authority:**
+4가지 필터:
+① 오늘 가능한가? (내일로 미룰 수 없는 것)
+② 구체적인가? ("기도해야겠다" ❌ → "지금 5분 기도한다" ✅)
+③ 작은가? (영웅적 행동이 아닌, 오늘 나의 삶에서 가능한 가장 작은 순종)
+④ 불편한가? (편한 것은 성장이 없고, 약간의 불편함이 변화의 신호)
 
-1. **CORE BIBLE** (THE_WAY_CORE_BIBLE.md)
-2. **This Constitution**
-3. **Design Documents**
-4. **Development Standards**
-5. **Game Industry Best Practices**
-
-If conflict exists: **Higher authority wins.**
-
-### Section 12.2: Amendments
-
-This Constitution cannot be amended except by:
-
-- Author's explicit written approval
-- Theological review ensuring integrity
-- Game design review ensuring quality
-
-**No casual changes.**
-
-### Section 12.3: Enforcement
-
-Every team member must:
-
-- Read and understand this Constitution
-- Pledge to uphold these principles
-- Question decisions that violate these laws
-- Propose revisions if conditions change materially
-
-**This is sacred law, not suggestion.**
+금지 사항: "더 열심히 신앙생활하기"(추상적), "교회에 더 자주 가기"(습관), "나쁜 생각 안 하기"(측정 불가), "기도 열심히 하기"(기준 없음).
 
 ---
 
-## FINAL WORD
+# PART 9. PLAYER JOURNEY — 플레이어 여정
 
-This Constitution is not harsh.
-
-It is **protective.**
-
-It protects:
-- The integrity of the message
-- The dignity of the player
-- The authenticity of the experience
-- The honor of God
-
-Build within these boundaries.
-
-You'll find freedom, not constraint.
-
-**THE WAY is not just a game.**
-
-**THE WAY is a sacred trust.**
-
-**Govern yourself accordingly.**
+5단계:
+1. **입문 (Entry)** — 첫 챕터를 만나고, 게임의 언어가 아니라 질문의 언어로 만난다
+2. **각성 (Awakening)** — 성경 이야기가 자신의 이야기와 겹친다
+3. **씨름 (Wrestling)** — 하나님의 질문이 불편하게 느껴지고, 진짜 회개를 경험한다
+4. **동행 (Walking Together)** — 일상에서 하나님을 찾기 시작하고, 현실 퀘스트가 습관이 된다
+5. **증인 (Witness)** — 자신의 Legacy가 다른 사람에게 빛이 되고, 여정은 평생 계속된다
 
 ---
 
-**Sealed:** June 8, 2026  
-**Status:** BINDING  
-**Revision:** 1.0  
+# PART 10. DEVELOPMENT PRIORITIES — 개발 우선순위
 
+모든 개발 결정은 이 헌법을 기준으로 판단한다.
+
+TIER 1 — 헌법 확정 (지금)
+TIER 2 — 핵심 엔진 (Divine Question, Legacy, CORE_BIBLE_100)
+TIER 3 — 성장 시스템 (Wisdom, 현실 퀘스트, Awakening)
+TIER 4 — 관계 및 회개 (Relationship, Repentance, Obedience)
+TIER 5 — 확장 콘텐츠 (DIVINE_QUESTION_365, Legacy 공유, 커뮤니티)
+
+절대 타협하지 않는 것:
+- 설교하지 않는다 | 정답을 알려주지 않는다 | 현실 순종이 게임 성취보다 높다
+- Legacy는 삭제되지 않는다 | 끝이 없는 여정이다 | 최종 목적은 하나님의 기쁨이다
+
+**예외 처리 원칙:** 핵심 철학은 타협하지 않는다. 단, **접근성은 항상 보장한다.**
+장애인, 고령자, 문해력이 낮은 사용자도 THE WAY의 여정에 동등하게 참여할 수 있어야 한다.
+
+---
+
+# APPENDIX — 핵심 문장 모음
+
+> THE WAY는 게임이 아니다. 영혼의 여정 플랫폼이다.
+> 게임은 수단이다. 회심이 목적이다.
+> 플레이어는 관객이 아니다. 질문받는 참여자다.
+> Wisdom Point는 경험치가 아니다. 삶에 적용한 흔적이다.
+> Legacy는 성공의 기록이 아니다. 여정의 기록이다.
+> 모든 기록은 언젠가 간증이 된다.
+> 현실 순종이 게임 성취보다 높은 가치를 가진다.
+> 모든 시스템은 결국 하나님 사랑, 이웃 사랑으로 수렴한다.
+> THE WAY는 목적지에 도착하는 게임이 아니다. 하나님을 평생 알아가는 여정이다.
+> THE WAY의 최종 목적은 플레이어가 예수 그리스도를 만나 회심하고, 평생 하나님을 알아가며, 겸손과 순종 가운데 성령과 동행하며, 하나님의 기쁨이 되는 삶을 살도록 돕는 것이다.
+> 모든 결정은 언젠가 지혜가 된다.
+> 말씀과 성령은 분리되지 않는다.
+
+---
+
+**버전:** v1.0 FINAL  
+**확정일:** 2026년 6월 9일  
+**상태:** ✅ 확정 — 이후 모든 개발의 기준으로 사용
